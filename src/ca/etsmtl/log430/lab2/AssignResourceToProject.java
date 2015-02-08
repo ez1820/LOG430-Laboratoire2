@@ -6,6 +6,10 @@ import ca.etsmtl.log430.common.Menus;
 import ca.etsmtl.log430.common.Project;
 import ca.etsmtl.log430.common.Resource;
 
+
+import ca.etsmtl.log430.common.Menus;
+import ca.etsmtl.log430.common.Project;
+import ca.etsmtl.log430.common.Resource;
 /**
  * Assigns resources to projects.
  *  

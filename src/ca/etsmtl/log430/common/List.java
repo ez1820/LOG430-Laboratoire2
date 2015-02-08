@@ -96,7 +96,7 @@ public class List {
 	/**
 	 * Sets vectorIndex back to zero, thereby pointing at the front of the list.
 	 */
-	void goToFrontOfList() {
+	protected void goToFrontOfList() {
 
 		vectorIndex = 0;
 
