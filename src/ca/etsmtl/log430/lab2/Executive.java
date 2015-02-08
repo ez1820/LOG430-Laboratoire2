@@ -58,7 +58,7 @@ public class Executive extends Communication {
 		addToReceiverList("ListProjectsAssignedToResourceComponent");
 		addToReceiverList("ListResourcesAssignedToProjectComponent");
 		addToReceiverList("AssignResourceToProject");
-		addToReceiverList("ListCurrentAndPreviousAssignedRoles");
+		addToReceiverList("ListCurrentProjectForRessource");
 		addToReceiverList("ListPreviousAndCurrentlyAssignedRoles");
 		
 		
@@ -87,7 +87,7 @@ public class Executive extends Communication {
 				break;
 			
 			case '6':
-				signalReceivers("ListCurrentAndPreviousAssignedRoles");
+				signalReceivers("ListCurrentProjectForRessource");
 				break;
 			
 			case '7':
