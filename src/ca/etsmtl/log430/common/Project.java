@@ -1,16 +1,17 @@
 package ca.etsmtl.log430.common;
 
+import java.util.Hashtable;
 
 /** This class defines the Project object for the system.
 * 
 * @author A.J. Lattanze, CMU
-* @version 1.7, 2013-Oct-06
+* @version 1.7, 2013-Sep-13
 */
 
 /*
 * Modification Log **********************************************************
-* v1.7, R. Champagne, 2013-Oct-06 - Various refactorings for new lab.
-*
+* v1.7, R. Champagne, 2013-Sep-13 - Various refactorings for new lab.
+* 
 * v1.6, R. Champagne, 2012-Jun-19 - Various refactorings for new lab.
 * 
 * v1.5, R. Champagne, 2012-May-31 - Various refactorings for new lab.
@@ -23,7 +24,7 @@ package ca.etsmtl.log430.common;
 * v1.2, R. Champagne, 2002-May-21 - Adapted for use at ETS.
 * 
 * v1.1, G.A.Lewis, 01/25/2001 - Bug in second constructor. Removed null
-* assignment to deliveryID after being assigned a value.
+* assignment to id after being assigned a value.
 * 
 * v1.0, A.J. Lattanze, 12/29/99 - Original version.
 * ***************************************************************************
@@ -55,6 +56,8 @@ public class Project {
 	 * Project priority
 	 */
 	private String priority;
+	
+	private Hashtable<String, Integer> load = new Hashtable<String, Integer>();
 
 	/**
 	 * List of resources assigned to the project
@@ -63,10 +66,16 @@ public class Project {
 
 	public Project() {
 		this(null);
+		load.put("H",100);
+		load.put("M",50);
+		load.put("L",25);
 	}
 
 	public Project(String id) {
 		this.setID(id);
+		load.put("H",100);
+		load.put("M",50);
+		load.put("L",25);
 	}
 
 	/**
@@ -124,6 +133,10 @@ public class Project {
 
 	public ResourceList getResourcesAssigned() {
 		return resourcesAssigned;
+	}
+	
+	public int getLoadByPriority(String priority){
+		return load.get(priority);
 	}
 
 } // Project class

@@ -1,6 +1,7 @@
 package ca.etsmtl.log430.common;
 
 
+
 /**
  * This class presents the user with menus, accepts their choice, ensures their
  * choice is valid, and returns their choice to the caller. The menu is
@@ -20,6 +21,10 @@ package ca.etsmtl.log430.common;
 /*
  * Modification Log
  * ***************************************************************************
+ * v1.6, E. Romeus, 2015-Jan-12 - Added functionality to list projects previously assigned to a resource
+ * 
+ * v1.6, J. Pouliot, 2015-Jan-12 - Added functionality to list all roles assigned to a project
+ * 
  * v1.5, R. Champagne, 2013-Sep-13 - Various refactorings for new lab.
  * 
  * v1.4, R. Champagne, 2012-May-31 - Various refactorings for new lab.
@@ -49,6 +54,8 @@ public class Menus {
 			System.out.println("3) List projects currently assigned to a resource");
 			System.out.println("4) List resources currently assigned to a project");
 			System.out.println("5) Assign a resource to a project");
+			System.out.println("6) List projects previously assigned to a resource");
+			System.out.println("7) List all roles assigned to a projects");
 			System.out.println("X) Exit");
 			System.out.print("\n\nEnter your choice and press return >> ");
 
@@ -57,7 +64,7 @@ public class Menus {
 			if ((userChoice != 'X') && (userChoice != 'x')
 					&& (userChoice < '1') && (userChoice != '2')
 					&& (userChoice != '3') && (userChoice < '4')
-					&& (userChoice != '5')) {
+					&& (userChoice != '5') && (userChoice != '6') && (userChoice != '7')) {
 
 				System.out.print("\n\n*** Invalid Choice:: " + userChoice
 						+ " ***");
