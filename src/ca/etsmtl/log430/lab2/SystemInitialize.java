@@ -46,16 +46,14 @@ public class SystemInitialize {
 				"ListProjectsAssignedToResourceComponent"); 
 		new ListResourcesAssignedToProject(new Integer(104),
 				"ListResourcesAssignedToProjectComponent");
+		new ListProjectsPreviouslyAssignedToResource(new Integer(105),
+				"ListProjectsPreviouslyAssignedToResourceComponent");
+		new ListAllRolesAssignedToProject(new Integer(106),
+				"ListAllRolesAssignedToProjectComponent");
 
-	//	new ListCurrentProjectForRessource(new Integer(106),
-			//	"ListCurrentProjectForRessource");
-	//	new ListPreviousAndCurrentlyAssignedRoles(new Integer(107),
-				//"ListPreviousAndCurrentlyAssignedRoles");
-		
-		Executive executiveComponent = new Executive(new Integer(105),
+		Executive executiveComponent = new Executive(new Integer(107),
 				"ExecutiveComponent");
 
-		
 		// Start the executive
 		executiveComponent.execute();
 	}

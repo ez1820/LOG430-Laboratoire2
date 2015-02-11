@@ -1,6 +1,6 @@
 package ca.etsmtl.log430.common;
 
-
+import ca.etsmtl.log430.common.Resource;
 
 /**
  * This class is used by various other classes that need to keep a list of
@@ -8,13 +8,13 @@ package ca.etsmtl.log430.common;
  * functionality for storage and retrieval of the Resource Object from the list.
  * 
  * @author A.J. Lattanze, CMU
- * @version 1.6, 2013-Sep-13
+ * @version 1.6, 2013-Oct-06
  */
 
 /*
  * Modification Log
  * ***************************************************************************
- * v1.6, R. Champagne, 2013-Sep-13 - Various refactorings for new lab.
+ * v1.6, R. Champagne, 2013-Oct-06 - Various refactorings for new lab.
  * 
  * v1.5, R. Champagne, 2012-Jun-19 - Various refactorings for new lab.
  * 

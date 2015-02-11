@@ -1,10 +1,10 @@
 package ca.etsmtl.log430.common;
 
+import ca.etsmtl.log430.common.Project;
+import ca.etsmtl.log430.common.ResourceList;
+import ca.etsmtl.log430.common.Resource;
 
 
-
-/**
- 
 /**
  * This class displays various types of information on projects and resources
  * (individually and as lists) to the screen.
@@ -16,10 +16,6 @@ package ca.etsmtl.log430.common;
 /*
  * Modification Log
  * ************************************************************************
- * v1.6, E. Romeus, 2015-Jan-12 - Added functionality to list projects previously assigned to a resource
- * 
- * v1.6, J. Pouliot, 2015-Jan-12 - Added functionality to list all roles assigned to a project
- * 
  * v1.6, R. Champagne, 2013-Sep-13 - Various refactorings for new lab.
  * 
  * v1.5, R. Champagne, 2012-Jun-19 - Various refactorings for new lab.
@@ -38,8 +34,6 @@ public class Displays {
 
 	private int lineCount = 0;
 	private int maxLinesDisplayed = 18;
-	private int countANA, countDES, countPRG, countTST = 0;
-	private int countPreviousANA, countPreviousDES, countPreviousPRG, countPreviousTST = 0;
 
 	/**
 	 * Counts the number of lines that has been printed. Once a set number of
@@ -176,13 +170,13 @@ public class Displays {
 		} // while
 
 	}
+
 	/**
-	 * Lists the projects previously assigned to a resource.
+	 * Lists the projects currently assigned to a resource during this session.
 	 * 
 	 * @param resource
-	 * @param list the list of projects
 	 */
-	public void displayProjectsPreviouslyAssignedToResource(Resource resource, ProjectList list){
+	public void displayProjectsPreviouslyAssignedToResource(Resource resource, ProjectList list) {
 
 		boolean done;
 		Project project;
@@ -191,8 +185,7 @@ public class Displays {
 				+ resource.getFirstName() + " " + resource.getLastName() + " "
 				+ resource.getID());
 		lineCheck(2);
-		System.out
-		.println("========================================================= ");
+		System.out.println("========================================================= ");
 		lineCheck(1);
 
 		resource.getPreviouslyAssignedProjectList().goToFrontOfList();
@@ -203,18 +196,88 @@ public class Displays {
 			project = resource.getPreviouslyAssignedProjectList().getNextProject();
 
 			if (project == null) {
+
 				done = true;
 
 			} else {
-
-				project = list.findProjectByID(project.getID());
-				displayProject(project);
+				displayProject(list.findProjectByID(project.getID()));
 				lineCheck(2);
 
 			} // if
 
 		} // while
 
+	}
+	
+	/**
+	 * 
+	 * @param project
+	 * @param list
+	 */
+	public void displayAllRolesAssignedToProject(Project project, ResourceList list){
+
+		boolean done;
+		Resource resource;
+		int countANA = 0, countDES = 0, countPRG = 0, countTST = 0;
+		int countPreviousANA = 0, countPreviousDES = 0, countPreviousPRG = 0, countPreviousTST = 0;
+
+		list.goToFrontOfList();
+		done = false;
+
+		while (!done) {
+			
+			resource = list.getNextResource();
+
+			if (resource == null) {
+				done = true;
+			} else {
+
+				if(resource.getRole().equals("ANA")){
+					if(resource.getPreviouslyAssignedProjectList().findProjectByID(project.getID()) != null)
+						countPreviousANA++;
+					if(resource.getProjectsAssigned().findProjectByID(project.getID()) != null)
+						countANA++;
+				}
+				else if(resource.getRole().equals("DES")){
+					if(resource.getPreviouslyAssignedProjectList().findProjectByID(project.getID()) != null)
+						countPreviousDES++;
+					if(resource.getProjectsAssigned().findProjectByID(project.getID()) != null)
+						countDES++;
+				}
+				else if(resource.getRole().equals("PRG")){
+					if(resource.getPreviouslyAssignedProjectList().findProjectByID(project.getID()) != null)
+						countPreviousPRG++;
+					if(resource.getProjectsAssigned().findProjectByID(project.getID()) != null)
+						countPRG++;
+				}
+				else if(resource.getRole().equals("TST")){
+					if(resource.getPreviouslyAssignedProjectList().findProjectByID(project.getID()) != null)
+						countPreviousTST++;
+					if(resource.getProjectsAssigned().findProjectByID(project.getID()) != null)
+						countTST++;
+				}
+			} // if
+
+		} // while
+
+		countANA+=countPreviousANA;
+		countDES+=countPreviousDES;
+		countPRG+=countPreviousPRG;
+		countTST+=countPreviousTST;
+
+		System.out.println("Avant\nANA "+countPreviousANA+"\nDES "+countPreviousDES+"\nPRG "+countPreviousPRG+"\nTST "+countPreviousTST+"\n");
+		System.out.println("Apres\nANA "+countANA+"\nDES "+countDES+"\nPRG "+countPRG+"\nTST "+countTST+"\n\n");
+
+		countANA=0;
+		countPreviousANA=0;
+		countDES=0;
+		countPreviousDES=0;
+		countPRG=0;
+		countPreviousPRG=0;
+		countTST=0;
+		countPreviousTST=0;
+
+		
 	}
 
 	/**
@@ -288,80 +351,6 @@ public class Displays {
 
 		} // while
 
-	}
-	
-	/**
-	 * Displays the roles of the different resources assigned to a projet
-	 * 
-	 * @param project
-	 * @param list the list of resources
-	 */
-	public void displayAssignedRoles(Project project, ResourceList list) {
-
-		boolean done;
-		Resource resource;
-
-		//project.getResourcesAssigned().goToFrontOfList();
-		list.goToFrontOfList();
-		done = false;
-
-		while (!done) {
-			
-			resource = list.getNextResource();
-
-			if (resource == null) {
-				done = true;
-			} else {
-
-				if(resource.getRole().equals("ANA")){
-					if(resource.getPreviouslyAssignedProjectList().findProjectByID(project.getID()) != null)
-						countPreviousANA++;
-					if(resource.getProjectsAssigned().findProjectByID(project.getID()) != null)
-						countANA++;
-				}
-				if(resource.getRole().equals("DES")){
-					if(resource.getPreviouslyAssignedProjectList().findProjectByID(project.getID()) != null)
-						countPreviousDES++;
-					if(resource.getProjectsAssigned().findProjectByID(project.getID()) != null)
-						countDES++;
-				}
-				if(resource.getRole().equals("PRG")){
-					if(resource.getPreviouslyAssignedProjectList().findProjectByID(project.getID()) != null)
-						countPreviousPRG++;
-					if(resource.getProjectsAssigned().findProjectByID(project.getID()) != null)
-						countPRG++;
-				}
-				if(resource.getRole().equals("TST")){
-					if(resource.getPreviouslyAssignedProjectList().findProjectByID(project.getID()) != null)
-						countPreviousTST++;
-					if(resource.getProjectsAssigned().findProjectByID(project.getID()) != null)
-						countTST++;
-				}
-			} // if
-
-		} // while
-
-		countANA+=countPreviousANA;
-		countDES+=countPreviousDES;
-		countPRG+=countPreviousPRG;
-		countTST+=countPreviousTST;
-		
-		displayRoles();
-
-	}
-
-	public void displayRoles(){
-		System.out.println("Avant\nANA "+countPreviousANA+"\nDES "+countPreviousDES+"\nPRG "+countPreviousPRG+"\nTST "+countPreviousTST+"\n");
-		System.out.println("Apres\nANA "+countANA+"\nDES "+countDES+"\nPRG "+countPRG+"\nTST "+countTST+"\n\n");
-
-		countANA=0;
-		countPreviousANA=0;
-		countDES=0;
-		countPreviousDES=0;
-		countPRG=0;
-		countPreviousPRG=0;
-		countTST=0;
-		countPreviousTST=0;
 	}
 
 } // Display

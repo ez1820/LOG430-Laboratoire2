@@ -1,6 +1,7 @@
 package ca.etsmtl.log430.common;
 
-
+import ca.etsmtl.log430.common.Resource;
+import ca.etsmtl.log430.common.ResourceList;
 
 /**
  * Reads from the InputFile and instantiates the Resource objects in the system.
@@ -23,13 +24,13 @@ package ca.etsmtl.log430.common;
  * The resources.txt file has been provided as an example.
  * 
  * @author A.J. Lattanze, CMU
- * @version 1.7, 2013-Sep-13
+ * @version 1.7, 2013-Oct-06
  */
 
 /*
  * Modification Log
  ************************************************************************
- * v1.7, 2013-Sep-13, R. Champagne, Various refactorings for new lab.
+ * v1.7, 2013-Oct-06, R. Champagne, Various refactorings for new lab.
  * 
  * v1.6, 2012-Jun-19, R. Champagne, Various refactorings for new lab.
  * 
@@ -83,8 +84,9 @@ public class ResourceReader extends LineOfTextFileReader {
 		String text; // Line of text from the file
 		boolean done; // End of the file - stop processing
 
-		// New resorce list object - this will contain all of the resources in
-		// the file
+		/* New resource list object - this will contain all of the resources in
+		/* the file
+		 */
 
 		ResourceList listObject = new ResourceList();
 
@@ -126,13 +128,13 @@ public class ResourceReader extends LineOfTextFileReader {
 
 		return (listObject);
 
-	} // readTeacherListFromFile
+	} // readResourceListFromFile
 
 	public ResourceList getListOfResources() {
 		return listOfResources;
 	}
 
-	public void setListOfDrivers(ResourceList listOfResources) {
+	public void setListOfResources(ResourceList listOfResources) {
 		this.listOfResources = listOfResources;
 	}
 

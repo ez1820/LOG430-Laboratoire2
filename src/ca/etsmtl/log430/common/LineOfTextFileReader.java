@@ -6,117 +6,106 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 /**
- * This class provides the methods that allow the caller to open an existing
- * file and read one line of input (to end-of-line) from the file.
- *
+ * Provides the methods that allow the caller to open an existing file and read
+ * one line of input (to end-of-line) from the file.
+ * 
  * @author A.J. Lattanze, CMU
- * @version 1.3, 2012-Feb-02
+ * @version 1.2, 2011-Feb-24
  */
 
-/* Modification Log
- **************************************************************************************
- * v1.3, R. Champagne, 2012-Feb-02 - Various refactorings for new lab.
+/*
+ * Modification Log **********************************************************
  * 
- * v1.2, 2011-Feb-02, R. Champagne - Various refactorings, javadoc comments.
- *  
- * v1.1, 2002-May-21, R. Champagne - Adapted for use at ETS. 
+ * v1.2, R. Champagne, 2011-Feb-24 - Various refactorings, conversion of
+ * comments to javadoc format.
  * 
- * v1.0, 12/29/99, A.J. Lattanze - Original version.
- **************************************************************************************/
+ * v1.1, R. Champagne, 2002-Jun-19 - Adapted for use at ETS.
+ * 
+ * v1.0, A.J. Lattanze, 12/29/99 - Original version.
+ * ***************************************************************************
+ */
+
 public class LineOfTextFileReader {
 
 	private File inputFile = null;
 	private BufferedReader inFile = null;
 
+	/**
+	 * Opens a file.
+	 * 
+	 * @param pathName
+	 *            Path to the file
+	 * @return true if file successfully open, false otherwise.
+	 */
 	public boolean openFile(String pathName) {
-
 		boolean result;
 		inputFile = new File(pathName);
 
-		// Open input file. The input file is a field oriented and
-		// space-separated.
-		// The fields and expected formats are listed above in the header
-
-		// Check to ensure that the inputFile exists
+		// Check to ensure that the InputFile exists
 		if (!inputFile.exists()) {
-
 			result = false;
 
+			// Debug Statements
+			System.out.print("LineOfTextFileReader::File "
+					+ inputFile.getAbsolutePath());
+			System.out.println(" NOT FOUND.");
+
 		} else {
+			/*
+			 * Open input file. The input file is a field oriented and
+			 * space-separated. The fields and expected formats are listed above
+			 * in the header
+			 */
+
 			try {
-
 				// Create a buffered reader the file
-
 				inFile = new BufferedReader(new InputStreamReader(
 						new FileInputStream((inputFile))));
-
 				result = true;
-
-			} // try
-
-			catch (Exception Error) {
-
+			} catch (Exception err) {
 				result = false;
-
-			} // catch
-
-		} // if
-
+			}
+		}
 		return (result);
+	}
 
-	} // OpenFile
-
+	/**
+	 * Reads a single line of text in a file.
+	 * 
+	 * @return a String containing the line of text.
+	 */
 	public String readLineOfText() {
-
 		String lineOfText = null;
 
 		// Read a line of text from the input file and convert it to upper case
-
 		try {
-
 			lineOfText = inFile.readLine();
-
-		} // try
-
-		catch (Exception Error) {
-
+		} catch (Exception err) {
 			try {
-
-				throw (Error);
-
-			} // try
-
-			catch (Exception e) {
-
+				throw (err);
+			} catch (Exception e) {
 				// We are in real trouble if we get here.
-
-			} // catch
-
-		} // catch
-
+			}
+		}
 		return (lineOfText);
+	}
 
-	} // ReadLineOfText
-
+	/**
+	 * Closes the file.
+	 * 
+	 * @return true if file successfully closed, false otherwise.
+	 */
 	public boolean closeFile() {
-
 		boolean result = true;
 
 		// Close the input file
 		try {
-
 			inFile.close();
-
-		} // try
-
-		catch (Exception Error) {
-
+		} catch (Exception e) {
 			result = false;
-
-		} // catch
+		}
 
 		return (result);
 
-	} // ReadLineOfText
-
-} // LineOfTextFileReader
+	}
+}

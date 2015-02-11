@@ -5,81 +5,69 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * This utility class contains methods that allow callers to perform various
- * I/O operations at the command line.
- *
- * @author A.J. Lattanze
- * @version 1.3, 2012-Feb-02
+ * Allow callers to perform various terminal related operations.
+ * 
+ * @author A.J. Lattanze, CMU
+ * @version 1.2, 2011-Feb-24
  */
 
-/* Modification Log
- ****************************************************************************
- * v1.3, R. Champagne, 2012-Feb-02 - Various refactorings for new lab.
+/*
+ * Modification Log **********************************************************
  * 
- * v1.2, 2011-Feb-02, R. Champagne - Various refactorings, javadoc comments.
- *  
- * v1.1, 2002-May-21, R. Champagne - Adapted for use at ETS. 
+ * v1.2, R. Champagne, 2011-Feb-24 - Various refactorings, conversion of
+ * comments to javadoc format.
  * 
- * v1.0, 12/29/99, A.J. Lattanze - Original version.
- ****************************************************************************/
+ * v1.1, R. Champagne, 2002-Jun-19 - Adapted for use at ETS.
+ * 
+ * v1.0, A.J. Lattanze, 12/29/99 - Original version.
+ * ***************************************************************************
+ */
 
 public class Termio {
 
 	/**
-	 * Reads a string from the keyboard and returns it to the caller
+	 * Reads a string from the keyboard and returns it to the caller.
 	 * 
-	 * @return The string from the keyboard and returns it to the caller
+	 * @return The string entered at by the user
 	 */
 	public String keyboardReadString() {
-
 		BufferedReader myReader = new BufferedReader(new InputStreamReader(
 				System.in));
 
 		String stringItem = "";
 
 		try {
-
 			stringItem = myReader.readLine();
-
-		} catch (IOException exc) {
-
+		} catch (IOException IOError) {
 			System.out
 					.println("Read Error in Termio.KeyboardReadString method");
-
-		} // try/catch
-
+		}
 		return stringItem;
-
-	} // keyboardReadString
+	}
 
 	/**
 	 * Reads a single character from the keyboard and returns it to the caller.
+	 * 
+	 * @return The character entered by the user.
 	 */
 	public char keyboardReadChar() {
-
 		BufferedReader myReader = new BufferedReader(new InputStreamReader(
 				System.in));
 
 		char charItem = ' ';
 
 		try {
-
 			charItem = (char) myReader.read();
-
-		} catch (IOException exc) {
-
+		} catch (IOException err) {
 			System.out.println("Read Error in Termio.KeyboardReadChar method");
-
-		} // try/catch
-
+		}
 		return charItem;
-
-	} // keyboardReadChar
+	}
 
 	/**
-	 * Determines if the input string represents a number. If an integer is
-	 * passed (for example 4), then the program will assume that it is a
-	 * floating point number (for example 4.0).
+	 * This method accepts a string and determines if it represents a number. If
+	 * an integer is passed (for example 4), then the program will assume that
+	 * it is a floating point number (for example 4.0).
 	 * 
 	 * @param stringItem
 	 * @return true if the string represents a numeric value, false otherwise.
@@ -87,99 +75,71 @@ public class Termio {
 	public boolean isNumber(String stringItem) {
 
 		try {
-
 			Float.valueOf(stringItem);
-
-		} catch (NumberFormatException exc) {
-
+		} catch (NumberFormatException err) {
 			return false;
-
-		} // try/catch
-
+		}
 		return true;
-
-	} // isNumber
+	}
 
 	/**
-	 * If the input string represents a number, convert it to a float and return
-	 * it to the caller, otherwise a NumericFormatException is raised and a
-	 * message is printed for the caller.
+	 * Accepts a string and if the string represents a number, then it is
+	 * converted to a float and returned to the caller. Otherwise a
+	 * NumericFormatException is raised and a message is printed for the caller.
 	 * 
 	 * @param stringItem
-	 * @return The input string as a float.
+	 * @return the string converted to float if relevant, 0.0 otherwise.
 	 */
 	public float toFloat(String stringItem) {
-
 		Float floatItem = new Float(0.0);
-
 		try {
-
 			floatItem = Float.valueOf(stringItem);
-
-		} catch (NumberFormatException exc) {
-
+		} catch (NumberFormatException err) {
 			System.out.print("Error converting " + stringItem);
 			System.out.print(" to a floating point number::");
 			System.out.println(" Termio.ToFloat method.");
-
-		} // try/catch
-
+		}
 		return floatItem.floatValue();
-
-	} // toFloat
+	}
 
 	/**
-	 * If the input string represents number, convert it to a double and return
-	 * it to the caller. Otherwise, a NumericFormatException is raised and a
-	 * message is printed for the caller.
+	 * Accepts a string and if the string represents a number, then it is
+	 * converted to a double and returned to the caller. Otherwise a
+	 * NumericFormatException is raised and a message is printed for the caller.
 	 * 
 	 * @param stringItem
-	 * @return The input string as a double.
+	 * @return the string converted to double if relevant, 0.0 otherwise.
 	 */
 	public double toDouble(String stringItem) {
-		Float floatItem = null;
+		Float floatItem = new Float(0.0);
+
 		try {
-
 			floatItem = Float.valueOf(stringItem);
-
-		} catch (NumberFormatException exc) {
-
+		} catch (NumberFormatException err) {
 			System.out.print("Error converting " + stringItem);
 			System.out.print(" to a floating point number::");
 			System.out.println(" Termio.ToDouble method.");
-
-		} // try/catch
-
+		}
 		return floatItem.doubleValue();
-
-	} // toDouble
+	}
 
 	/**
-	 * If the input string represents number, convert it to an integer and
-	 * return it to the caller. Otherwise, a NumericFormatException is raised
-	 * and a message is printed for the caller.
+	 * Accepts a string and if the string represents a number, then it is
+	 * converted to an integer and returned to the caller. Otherwise a
+	 * NumericFormatException is raised and a message is printed for the caller.
 	 * 
 	 * @param stringItem
-	 * @return The input string as an integer.
+	 * @return the string converted to double if relevant, 0 otherwise.
 	 */
 	public int toInteger(String stringItem) {
-
-		Integer integerItem = null;
-
+		Integer integerItem = new Integer(0);
 		try {
-
 			integerItem = Integer.valueOf(stringItem);
-
-		} catch (NumberFormatException exc) {
-
+		} catch (NumberFormatException err) {
 			System.out.print("Error converting " + stringItem);
 			System.out.print(" to an integer number::");
 			System.out.println(" Termio.ToInteger method.");
-
-		} // try/catch
-
+		}
 		return integerItem.intValue();
-
-	} // toInteger
-
-} // Termio class
+	}
+}

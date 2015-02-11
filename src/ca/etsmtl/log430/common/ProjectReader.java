@@ -1,7 +1,6 @@
 package ca.etsmtl.log430.common;
 
 
-
 /**
  * This class will read from the InputFile and instantiate the Project objects
  * in the system. It is assumed that the InputFile is in the local directory,
@@ -19,12 +18,12 @@ package ca.etsmtl.log430.common;
  * The projects.txt file has been provided as an example file.
  *
  * @author A.J. Lattanze, CMU
- * @version 1.6, 2013-Sep-13
+ * @version 1.6, 2013-Oct-06
  */
 
 /* Modification Log
  *****************************************************************************
- * v1.6, R. Champagne, 2013-Sep-13 - Various refactorings for new lab.
+ * v1.6, R. Champagne, 2013-Oct-06 - Various refactorings for new lab.
  * 
  * v1.5, R. Champagne, 2012-Jun-19 - Various refactorings for new lab.
  * 

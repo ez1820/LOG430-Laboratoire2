@@ -7,13 +7,13 @@ package ca.etsmtl.log430.common;
  * storage and retrieval of the Project object from the list.
  * 
  * @author A.J. Lattanze, CMU
- * @version 1.6, 2013-Sep-13
+ * @version 1.6, 2013-Oct-06
  */
 
 /*
  * Modification Log
  * ****************************************************************************
- * v1.6, R. Champagne, 2013-Sep-13 - Various refactorings for new lab.
+ * v1.6, R. Champagne, 2013-Oct-06 - Various refactorings for new lab.
  * 
  * v1.5, R. Champagne, 2012-Jun-19 - Various refactorings for new lab.
  * 
