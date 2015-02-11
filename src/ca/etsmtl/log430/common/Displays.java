@@ -195,8 +195,7 @@ public class Displays {
 
 			project = resource.getPreviouslyAssignedProjectList().getNextProject();
 
-			if (project == null) {
-
+			if (project == null || project.getProjectName() == null) {
 				done = true;
 
 			} else {
