@@ -2,3 +2,7 @@ R001 Bleau Joseph ANA P001 P003
 R002 Diant Letu DES P002
 R003 Smith John PRG P004
 R004 Lebogue Itrouve TST P004
+R005 Doe Jane DES P002
+R006 Bama Chris PRG P002
+R007 Poule Jules TST 
+R008 User Test ANA P001
